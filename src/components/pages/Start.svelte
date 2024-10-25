@@ -1,4 +1,3 @@
-
 <div class="start home">
   <div class="dopamine-box">
     Daily Tests
@@ -15,7 +14,7 @@
   </div>
 
   <div class="select-stages-prompt">
-    <!-- <- Select stages (shift-click to toggle multiple) -->
+    &larr; Select stages (shift-click to toggle multiple)
   </div>
   <h3>Test options</h3>
   <div class="test-options-explanation">

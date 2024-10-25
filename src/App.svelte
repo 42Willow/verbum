@@ -12,6 +12,6 @@
   <StageList />
 
   <Start />
-  <Tester />
-  <End />
+  <!-- <Tester />
+  <End /> -->
 </main>
