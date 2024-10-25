@@ -39,7 +39,7 @@ body {
   font-family: 'Golos text', monospace;
 }
 
-.main {
+main {
   position: relative;
   display: flex;
   flex-direction: column;
