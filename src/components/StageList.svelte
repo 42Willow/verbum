@@ -72,5 +72,12 @@
       </div>
     {/each}
   </div>
-  <div class="stage-button stage-41-button">extra list</div>
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div
+    class="stage-button stage-41-button"
+    on:click={(event) => handleStageClick(event, 41-1)}
+  >
+  extra list
+  </div>
 </div>
