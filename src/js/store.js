@@ -6,6 +6,7 @@ export const sSettingsOpen = writable(false);
 export const sAnimationDuration = writable(0.75);
 export const sSecondChance = writable(true);
 export const sDopamineBox = writable(false);
+export const sCurrentScreen = writable(0);
 
 // stages
 export const stagesSelected = writable("00000000000000000000000000000000000000000");
@@ -28,8 +29,8 @@ export const dbTestsCompleted = writable("0000000");
 
 // test options
 export const testOptionsTypes = writable(["cycle", "word", "s", "m"]);
-export const testOptionsType = writable(0);
-export const testOptionsValue = writable(0);
+export const testOptionsType = writable(0); // 0 = cycle, 1 = word, 2 = second, 3 = minute
+export const testOptionsValue = writable(0); // number of cycles, words, or seconds (minutes are converted)
 
 // word list
 export const selectedWordlist = writable([0]);

@@ -1,4 +1,13 @@
+<script>
+  import { sDopamineBox } from "../../js/store";
+  import Settings from "../Settings.svelte";
+  import { startTest } from "../../js/utils";
+</script>
+
+<Settings />
+
 <div class="start home">
+  {#if $sDopamineBox}
   <div class="dopamine-box">
     Daily Tests
     <div class="db-week"></div>
@@ -12,6 +21,7 @@
       <div class="db-day"></div>
     </div>
   </div>
+  {/if}
 
   <div class="select-stages-prompt">
     &larr; Select stages (shift-click to toggle multiple)
@@ -25,7 +35,7 @@
   </div>
   <input id="test-options" class="test-options-input" type="text" placeholder="type in your test options here">
   <div style="display:flex">
-    <div class="start-button">Start</div>
+    <div class="start-button" on:click={startTest}>Start</div>
     <div class="free-button">Free</div>
   </div>
 </div>

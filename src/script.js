@@ -122,95 +122,54 @@ function changeScreen(screenNum) {
 ----------------*/
 
 // LOAD SETTINGS FROM LOCAL STORAGE
-function loadSettings() {
-  // read settings from local storage
-  if (read("animation-duration") !== "") sAnimationDuration = parseFloat(read("animation-duration"));
-  if (read("second-chance") !== "") sSecondChance = read("second-chance") === "true";
-  if (read("dopamine-box") !== "") sDopamineBox = read("dopamine-box") === "true";
-  displaySettings();
-  updateSettings();
-}
 
-// DISPLAY SETTINGS VALUES 
-function displaySettings() {
-  // display settings in settings panel
-  hsAnimationDuration.value = sAnimationDuration.toString();
-  hsSecondChance.checked = sSecondChance;
-  hsDopamineBox.checked = sDopamineBox;
-}
 
-// UPDATE THE SETTINGS (SAVE)
-function updateSettings() {
-  // animation duration
-  sAnimationDuration = parseFloat(hsAnimationDuration.value);
-  for (let wordElement of hWords) wordElement.style.transition = "all " + (sAnimationDuration*2/3).toString() + "s, margin-bottom " + sAnimationDuration.toString() + "s, visibility 0s";
-  // second chance
-  sSecondChance = hsSecondChance.checked;
-  if (sSecondChance) chances = 1;
-  else chances = 0;
-  // dopamine box
-  sDopamineBox = hsDopamineBox.checked;
-  if (sDopamineBox) hDopamineBox.style.display = "block";
-  else hDopamineBox.style.display = "none";
-  // write settings to local storage
-  write("animation-duration", sAnimationDuration.toString());
-  write("second-chance", sSecondChance.toString());
-  write("dopamine-box", sDopamineBox.toString());
-}
-
-// SHOW SETTINGS PANEL WHEN ICON IS CLICKED (TOGGLE)
-hSettingsButton.onclick = function() {
-  // toggle the settings open
-  sSettingsOpen = !sSettingsOpen;
-  // open or close the settings
-  if (sSettingsOpen) hSettings.style.display = "block";
-  if (!sSettingsOpen) hSettings.style.display = "none";
-}
 
 // update settings whenever an input field is changed
-hsAnimationDuration.onkeyup = function() {updateSettings()};
-hsSecondChance.onclick = function() {updateSettings()};
-hsDopamineBox.onclick = function() {updateSettings()};
+// Not needed with svelte store I think
+// hsAnimationDuration.onkeyup = function() {updateSettings()};
+// hsSecondChance.onclick = function() {updateSettings()};
+// hsDopamineBox.onclick = function() {updateSettings()};
 
 /*----------------
       STAGES
 ----------------*/
 
-// LOAD STAGES FROM LOCAL STRAGE
-function loadStages() {
-  if (read("stages-selected") !== "") stagesSelected = read("stages-selected");
-  displayStages();
-}
+// // LOAD STAGES FROM LOCAL STRAGE
+// function loadStages() {
+//   if (read("stages-selected") !== "") stagesSelected = read("stages-selected");
+//   displayStages();
+// }
 
-// DISPLAY STAGES
-function displayStages() {
-  for (let i = 0; i < 41; i++) {
-    if (stagesSelected[i] === "0") hStageButtons[i].style.backgroundColor = "#313244";
-    else hStageButtons[i].style.backgroundColor = "#11111b";
-  }
-}
+// // DISPLAY STAGES
+// function displayStages() {
+//   for (let i = 0; i < 41; i++) {
+//     if (stagesSelected[i] === "0") hStageButtons[i].style.backgroundColor = "#313244";
+//     else hStageButtons[i].style.backgroundColor = "#11111b";
+//   }
+// }
 
-// STAGE SELECTION
-for (let i = 0; i < 41; i++) {
-  hStageButtons[i].onclick = function(event) {
-    if (!canSelectStages) return;
-    // shift click: toggle up to
-    if (event.shiftKey) {
-      if (stagesSelected[i] === "0") stagesSelected = "1".repeat(i + 1) + stagesSelected.substring(i + 1);
-      else stagesSelected = "0".repeat(i + 1) + stagesSelected.substring(i + 1);
-    }
-    // normal click: toggle single
-    else {
-      if (stagesSelected[i] === "0") stagesSelected = stagesSelected.substring(0, i) + "1" + stagesSelected.substring(i + 1);
-      else stagesSelected = stagesSelected.substring(0, i) + "0" + stagesSelected.substring(i + 1);
-    }
-    // write stages selected to local storage
-    write("stages-selected", stagesSelected);
-    displayStages();
-    // reintialise the test
-    initialise();
-  }
-}
+// // STAGE SELECTION
+// for (let i = 0; i < 41; i++) {
+//   hStageButtons[i].onclick = function(event) {
+//     if (!canSelectStages) return;
+//     // shift click: toggle up to
+//     if (event.shiftKey) {
+//       if (stagesSelected[i] === "0") stagesSelected = "1".repeat(i + 1) + stagesSelected.substring(i + 1);
+//       else stagesSelected = "0".repeat(i + 1) + stagesSelected.substring(i + 1);
+//     }
+//     // normal click: toggle single
+//     else {
+//       if (stagesSelected[i] === "0") stagesSelected = stagesSelected.substring(0, i) + "1" + stagesSelected.substring(i + 1);
+//       else stagesSelected = stagesSelected.substring(0, i) + "0" + stagesSelected.substring(i + 1);
+//     }
+//     // write stages selected to local storage
+//     write("stages-selected", stagesSelected);
+//     displayStages();
+//     // reintialise the test
+//     initialise();
+//   }
+// }
 
 /*----------------
       STATS

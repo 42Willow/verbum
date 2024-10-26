@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte';
+  import { stagesSelected, canSelectStages } from '../js/store';
+  import { get } from 'svelte/store';
 
-  let stagesSelected = "0".repeat(41);
-  let canSelectStages = true;
   let hStageButtons = [];
 
  // @ts-ignore
@@ -11,27 +11,27 @@
   function displayStageColours() {
     for (let i = 0; i < 41; i++) {
       if (hStageButtons[i]) {
-        hStageButtons[i].style.backgroundColor = stagesSelected[i] === "0" ? "#313244" : "#11111b";
+        hStageButtons[i].style.backgroundColor = get(stagesSelected)[i] === "0" ? "#313244" : "#11111b";
       }
     }
   }
 
   // @ts-ignore
   function handleStageClick(event, index) {
-    console.log("handleStageClick", event, index);
-    if (!canSelectStages) return;
+    // console.log("handleStageClick", event, index);
+    if (!get(canSelectStages)) return;
 
     if (event.shiftKey) {
-      if (stagesSelected[index] === "0") {
-        stagesSelected = "1".repeat(index + 1) + stagesSelected.substring(index + 1);
+      if (get(stagesSelected)[index] === "0") {
+        stagesSelected.update(value => "1".repeat(index + 1) + value.substring(index + 1));
       } else {
-        stagesSelected = "0".repeat(index + 1) + stagesSelected.substring(index + 1);
+        stagesSelected.update(value => "0".repeat(index + 1) + value.substring(index + 1));
       }
     } else {
-      if (stagesSelected[index] === "0") {
-        stagesSelected = stagesSelected.substring(0, index) + "1" + stagesSelected.substring(index + 1);
+      if (get(stagesSelected)[index] === "0") {
+        stagesSelected.update(value => value.substring(0, index) + "1" + value.substring(index + 1));
       } else {
-        stagesSelected = stagesSelected.substring(0, index) + "0" + stagesSelected.substring(index + 1);
+        stagesSelected.update(value => value.substring(0, index) + "0" + value.substring(index + 1));
       }
     }
     displayStageColours();

@@ -1,4 +1,7 @@
+<script>
+  import { endTest } from "../../js/utils";
 
+</script>
 <div class="words test">
   <!-- Previous word -->
   <div class="word word-small" id="p">
@@ -42,4 +45,4 @@
   </div>
 </div>
 
-<div class="end-test-button test">End test</div>
+<div class="end-test-button test" on:click={endTest}>End test</div>
